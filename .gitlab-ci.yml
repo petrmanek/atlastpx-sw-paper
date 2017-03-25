@@ -1,0 +1,8 @@
+build:
+  script:
+    - make clean
+    - make
+  artifacts:
+    paths:
+      - atlastpx_sw_article.pdf
+
