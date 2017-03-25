@@ -1,7 +1,10 @@
+stages:
+  - build
+
 build:
-  script:
-    - make clean
-    - make
+  stage: build
+  before_script: make clean
+  script: make
   artifacts:
     paths:
       - atlastpx_sw_article.pdf
