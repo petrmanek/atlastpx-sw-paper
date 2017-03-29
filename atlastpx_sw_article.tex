@@ -51,7 +51,12 @@ Each ATLAS-TPX device consists of two Timepix~\cite{Llopart2007} readout chips w
 Data are taken in so-called frames, representing the counter contents of all individual pixels after an adjustable exposure time (often also referred to as frame acquisition time). In each frame, interacting quanta of ionizing radiation can be seen as tracks on the pixel matrix, which have characteristic shapes, depending on the particle range in silicon, its deposited energy, angle of incidence, and particle type. 
 
 \section{\label{sec:hardware}Hardware Architecture}
-TODO
+A read-out interface is a special dedicated hardware device that reads data and controls acquisition of the detector. \cite{Pixelman} Given the harsh radiation environment within the ATLAS machine, the ATLASPIX interface was developed by modifying a regular FITPix interface. \cite{FITPix}
+
+The interface has two parts connected by four cables. The detector itself is positioned and oriented within the ATLAS machine, whereas the rest of the interface is placed in a nearby server room, shielded against ionizing radiation. Cables connect both parts, allowing protected hardware to control detectors remotely\footnote{The software used to control and process results of data acquisition is fundamentally similar to the software used in the MPX network. \cite{ProcessingSoftware}} during operation of the machine. To manage multiple detectors simultaneously, a computer is directly connected to all read-out interfaces. This computer, also known as \textit{the control PC}, gathers all measured data and forwards commands from the system operator to the detectors through the ATLASPIX interface. This configuration is shown in Figure \ref{fig:ATLASPIX}.
+
+At the time of writing this work, the control PC is being operated manually from a remote location. The automation of the operation is under investigation (for more information, see Section \ref{import-automation}).
+
 
 \begin{figure}[tbp]
 	\centering
@@ -82,6 +87,15 @@ TODO
 
 \section{\label{sec:dal}Visualization Application}
 TODO
+\cite{Manek2016}
+
+\begin{figure}[tbp]
+	\centering
+        \includegraphics[clip, width=.45\textwidth, angle = 0 ]{Plots/screen-tpx01-crosshair-zoomed.png}
+      \caption {TODO}
+    \label{fig:positions}
+\end{figure}
+
 
 \section{\label{sec:conclusion}Conclusion}
 TODO
