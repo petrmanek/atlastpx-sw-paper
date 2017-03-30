@@ -57,7 +57,6 @@ The interface has two parts connected by four cables. The detector itself is pos
 
 At the time of writing this work, the control PC is being operated manually from a remote location. The automation of the operation is under investigation (for more information, see Section \ref{import-automation}).
 
-
 \begin{figure}[tbp]
 	\centering
         \includegraphics[clip, width=.45\textwidth, angle = 0 ]{Plots/ATLASTPX.png}
@@ -79,14 +78,18 @@ At the time of writing this work, the control PC is being operated manually from
     \label{fig:data_flow}
 \end{figure}
 
-\section{\label{sec:acquisition}Data Acquisition Software}
-TODO
+\section{\label{sec:acquisition}Acquisition \& Control Software}
+TODO Jakub
 
 \section{\label{sec:analysis}Data Analysis Software}
-TODO
+Frames taken by the detectors are periodically transferred from the control PC to the EOS disk pool storage in 1-hour batches. Once in EOS, data files are subject to further verification by series of automated tests, which are designed to detect known faults and data inconsistencies. If the data is confirmed to be valid, frames are then processed by a common cluster analysis algorithm \cite{Holy2008} and combined with energy calibration data. \cite{Jakubek2011} Results are saved in ROOT \cite{ROOT} data files, which are stored back in EOS.
+
+Due to the possibility of network failures, all analysis is performed asynchronously with respect to the incoming data stream. This approach trades off real-time access to results for robustness of the system and precision of all secondary calculations. Moreover, since real-time deadlines for analysis tasks are removed, novel analysis algorithms can be introduced. In practice, data processing latency has been observed to fluctuate between tens of seconds to several minutes per 1~hour of data, depending on the acquisition frequency of the detector and frame occupancy at the time of measurement.
+
+TODO Petr
 
 \section{\label{sec:dal}Visualization Application}
-TODO
+TODO Petr
 \cite{Manek2016}
 
 \begin{figure}[tbp]
