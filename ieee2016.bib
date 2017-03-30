@@ -46,6 +46,7 @@ journal = {Radiation Protection Dosimetry}
 type="Bachelor Thesis",
 school="Czech Technical University in Prague, Faculty of Electrical Engineering",
 author="P. Manek",
+year=2016,
 title="{Interactive Visualization System for Hybrid Active Pixel Detectors Within the ATLAS Experiment at CERN}",
 url="https://dspace.cvut.cz/bitstream/handle/10467/64670/F3-BP-2016-Manek-Petr-thesis.pdf"
 }	
@@ -252,4 +253,45 @@ type = "Dissertation"
   author = "Rene Brun and Fons Rademakers",
   abstract = "The {ROOT} system in an Object Oriented framework for large scale data analysis. {ROOT} written in C++, contains, among others, an efficient hierarchical {OO} database, a C++ interpreter, advanced statistical analysis (multi-dimensional histogramming, fitting, minimization, cluster finding algorithms) and visualization tools. The user interacts with {ROOT} via a graphical user interface, the command line or batch scripts. The command and scripting language is C++ (using the interpreter) and large scripts can be compiled and dynamically linked in. The {OO} database design has been optimized for parallel access (reading as well as writing) by multiple processes. "
 }
+
+@MastersThesis{Pixelman,
+  author = {Daniel Turecek},
+  title = {{Software for Radiation Detectors Medipix}},
+  school = {Czech Technical University in Prague},
+  address = {Czech Republic},
+  year = {2011},
+}
+
+@article{FITPix,
+  author={V Kraus and M Holik and J Jakubek and M Kroupa and P Soukup and Z Vykydal},
+  title={{FITP}ix — fast interface for Timepix pixel detectors},
+  journal={Journal of Instrumentation},
+  volume={6},
+  number={01},
+  pages={C01079},
+  url={http://stacks.iop.org/1748-0221/6/i=01/a=C01079},
+  year={2011},
+  abstract={The semiconductor pixel detector Timepix contains an array of 256 × 256 square pixels with pitch 55 μm. In addition to high spatial granularity the single quantum counting detector Timepix can provide also energy or time information in each pixel. This device is a powerful tool for radiation and particle detection, imaging and tracking. A new readout interface for silicon pixel detectors of the Medipix family has been developed in our group in order to provide a higher frame rate and enhanced flexibility of operation. The interface consists of a field programmable gate array, a USB 2.0 interface chip, DAC, ADC and a circuit which generates bias voltage for the sensor. The main control system is placed in the FPGA circuit which fully controls the Timepix device. This approach offers an easy way how to include new functionality and extended operation. The interface for Timepix supports all operation modes of the detector (counting, TOT, timing). The FITPix is a successor of the USB 1.22 Interface and the electronic readout is built with the latest available components, which allows achieving up to 90 frames per second with a single detector. The frame rate is about 20 times faster compared to the previous system while it maintains all same capabilities supported. In addition FITPix newly enables an adjustable clock frequency and hardware triggering which is a useful tool when there is the need for synchronized operation of multiple devices. Three modes of hardware trigger have been implemented: hardware trigger which starts the measurement, hardware trigger which terminates the measurement and hardware trigger which controls measurement fully. The entire system is fully powered through the USB bus. FITPix supports also readout from several detectors in chain in which case just an external power source is required. FITPix is a fully flexible device and the user needs no other equipment. FITPix combines high performance and mobility and it opens new fields of applications. The current version of the FITPix interface has dimension 45 mm × 60 mm.}
+}
+
+@article{ProcessingSoftware,
+title = "Data acquisition and processing software package for {M}edipix2 ",
+journal = "Nuclear Instruments and Methods in Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equipment ",
+volume = "563",
+number = "1",
+pages = "254 - 258",
+year = "2006",
+note = "Proceedings of the 7th International Workshop on Radiation Imaging Detectors IWORID 2005, 7th International Workshop on Radiation Imaging Detectors ",
+issn = "0168-9002",
+doi = "http://dx.doi.org/10.1016/j.nima.2006.01.122",
+url = "http://www.sciencedirect.com/science/article/pii/S0168900206002075",
+author = "T. Holy and J. Jakubek and S. Pospisil and J. Uher and D. Vavrik and Z. Vykydal",
+keywords = "Medipix",
+keywords = "Software",
+keywords = "Radiography",
+keywords = "Tomography",
+keywords = "Beam-hardening ",
+abstract = "The semiconductor pixel detector Medipix2 [1] (256×256 square pixels, 55×55 μm2 each) is a superior imaging device in terms of spatial resolution, linearity and dynamic range. This makes it suitable for various applications such as radiography, neutronography, and micro–tomography. The software package for acquisition and data processing has been developed to control and manage complex measurements. The solution features an open and very flexible modular architecture with custom made plugin support. Plugins can control parts of the acquisition system as well as perform real-time data processing and use these results as feedback for controlling further steps of measurements. This allows us to control, e.g. data acquisition, position and rotation of the sample (stepper motors), source parameters, temperature, etc. in a synchronized way. An example is the adaptive tomography plugin which adaptively controls the measurement and benefits from preprocessing performed by other plugins such as the beam-hardening correction of measured projections. "
+}
+
 
