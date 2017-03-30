@@ -14,7 +14,7 @@
 
 \begin{document}
 
-\title{Software system for data acquisition and real-time analysis operating the ATLAS-TPX network}
+\title{Software system for data acquisition and real-time analysis operating the ATLAS-TPX Network}
 
 \author{Benedikt~Bergmann, Jakub~Begera, Petr~Burian, Josef~Janecek, Petr~Manek, Stepan~Polansky, Stanislav~Pospisil~\IEEEmembership{Senior~Member,~IEEE}
 
@@ -33,14 +33,29 @@ E-mail: jakub.begera@cvut.cz, petr.manek@cvut.cz}
 
 %\tableofcontents
 
-\begin{abstract} 
-TODO
+\begin{abstract}
+A network of 15 Timepix pixel detectors was installed within the ATLAS experiment at CERN, Geneva. The network is capable of real-time measurement of the composition and spectral characteristics of the radiation fields. Its operation is managed by a dedicated software system. The presented article describes primary components of this system responsible for communication with detector hardware, online operation monitoring, remote acquisition control, automated data verification and analysis. The processed data can be accessed through an interactive web-based Data Visualization Application, which is publicly available to the scientific community.
 \end{abstract}
 
 \section{\label{sec:introduction}Introduction}
-TODO
+The ATLAS-MPX Network has been installed in the ATLAS cavern at the LHC at CERN~\cite{CampbellATLAS}. During the 2013-2014 shut-down period this network was upgraded to a two-layer Timepix design (ATLAS-TPX, see Fig.~\ref{fig:positions}) with a faster readout system and improved capabilities to discriminate charged particles and gamma rays against neutrons.
 
-\section{\label{sec:device}Timepix Detector}
+\begin{figure}[tbp]
+	\centering
+        \includegraphics[clip, width=.45\textwidth, angle = 0 ]{Plots/ATLASTPX.png}
+      \caption {Artistic view of the device positions of the ATLAS-TPX network in the ATLAS experiment.}
+    \label{fig:positions}
+\end{figure}
+
+Operation of the network is managed by a distributed software system comprised of several independent components:
+
+\begin{itemize}
+\item The Acquisition and Control Subsystem handles communication with detectors through the readout interface.
+\item The Data Analysis Subsystem automatically verifies and processes frames taken by detectors.
+\item The Data Visualization Application displays processed data in the form of pixel matrices and trace flux charts.
+\end{itemize}
+
+\section{\label{sec:device}Device Design}
 Each ATLAS-TPX device consists of two Timepix~\cite{Llopart2007} readout chips with silicon sensor layers of thicknesses 300\,$\mu$m and 500\,$\mu$m facing each other. They are interlaced by a set of neutron converters. The Timepix ASIC (application specific integrated circuit) divides the sensor area into a square matrix of $256 \times 256$ contiguous pixels with a pixel dimension of 55\,$\mu$m. It allows a configuration of each pixel in either of the three modes of operation: 
 \begin{itemize}
 \item In the spectroscopic Time-over-Threshold (ToT) mode the energy deposition in the sensor material is measured.
@@ -51,18 +66,9 @@ Each ATLAS-TPX device consists of two Timepix~\cite{Llopart2007} readout chips w
 Data are taken in so-called frames, representing the counter contents of all individual pixels after an adjustable exposure time (often also referred to as frame acquisition time). In each frame, interacting quanta of ionizing radiation can be seen as tracks on the pixel matrix, which have characteristic shapes, depending on the particle range in silicon, its deposited energy, angle of incidence, and particle type. 
 
 \section{\label{sec:hardware}Hardware Architecture}
-A read-out interface is a special dedicated hardware device that reads data and controls acquisition of the detector. \cite{Pixelman} Given the harsh radiation environment within the ATLAS machine, the ATLASPIX interface was developed by modifying a regular FITPix interface. \cite{FITPix}
+Given the harsh radiation environment within the ATLAS machine, the ATLAS-TPX devices have to be connected to the rest of the system through a dedicated read-out interface. This interface is a special hardware device that reads data and controls acquisition of the detector~\cite{Pixelman}. The ATLASPIX interface (see Fig.~\ref{fig:device_with_readout}) was developed by modifying a regular FITPix interface~\cite{FITPix}.
 
-The interface has two parts connected by four cables. The detector itself is positioned and oriented within the ATLAS machine, whereas the rest of the interface is placed in a nearby server room, shielded against ionizing radiation. Cables connect both parts, allowing protected hardware to control detectors remotely\footnote{The software used to control and process results of data acquisition is fundamentally similar to the software used in the MPX network. \cite{ProcessingSoftware}} during operation of the machine. To manage multiple detectors simultaneously, a computer is directly connected to all read-out interfaces. This computer, also known as \textit{the control PC}, gathers all measured data and forwards commands from the system operator to the detectors through the ATLASPIX interface. This configuration is shown in Figure \ref{fig:ATLASPIX}.
-
-At the time of writing this work, the control PC is being operated manually from a remote location. The automation of the operation is under investigation (for more information, see Section \ref{import-automation}).
-
-\begin{figure}[tbp]
-	\centering
-        \includegraphics[clip, width=.45\textwidth, angle = 0 ]{Plots/ATLASTPX.png}
-      \caption {Artistic view of the device positions of the ATLAS-TPX network in the ATLAS experiment.}
-    \label{fig:positions}
-\end{figure}
+The interface has two parts connected by four cables. The detector itself is positioned and oriented within the ATLAS machine, whereas the rest of the interface is placed in a nearby server room, shielded against ionizing radiation. Cables connect both parts, allowing protected hardware to control detectors remotely during operation of the machine. To manage multiple detectors simultaneously, a computer is directly connected to all read-out interfaces. This computer, also known as \textit{the Control PC}, gathers all measured data and forwards commands from the system operator to the detectors through the ATLASPIX interface.
 
 \begin{figure}[tbp]
 	\centering
@@ -70,6 +76,8 @@ At the time of writing this work, the control PC is being operated manually from
       \caption {ATLAS-TPX device, connected to its readout system through three Ethernet cables. The readout system consists of an FPGA, handling the device settings and operation, and a Raspberry Pi minicomputer for sending the data to the control PC in human readable format. Two voltage supplies are used for feeding the proper bias to each of the sensor layers.}
     \label{fig:device_with_readout}
 \end{figure}
+
+The Control PC is connected directly to the ATLAS Network, which is isolated from the rest of CERN network infrastructure. Consequently, all communications outside the network have to utilize other systems. Acquisition control and real-time status monitoring of the network uses DCS (Detector Control System). Taken data is transferred to the EOS storage system. Communication between components of the system is depicted in Fig.~\ref{fig:data_flow}.
 
 \begin{figure}[tbp]
 	\centering
