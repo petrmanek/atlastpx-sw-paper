@@ -38,7 +38,7 @@ A network of 15 Timepix pixel detectors was installed within the ATLAS experimen
 \end{abstract}
 
 \section{\label{sec:introduction}Introduction}
-The ATLAS-MPX Network has been installed in the ATLAS cavern at the LHC at CERN~\cite{CampbellATLAS}. During the 2013-2014 shut-down period this network was upgraded to a two-layer Timepix design (ATLAS-TPX) with a faster readout system and improved capabilities to discriminate charged particles and gamma rays against neutrons.
+The ATLAS-MPX Network has been installed in the ATLAS cavern at the LHC at CERN~\cite{CampbellATLAS}. During the 2013-2014 shut-down period this network was upgraded to a two-layer Timepix design (ATLAS-TPX) with a faster readout system and improved capabilities to discriminate charged particles and gamma rays against neutrons~\cite{Proposal_Claude}.
 
 Operation of the network is managed by a distributed software system comprised of several independent components:
 ~
@@ -78,7 +78,7 @@ The interface has two parts connected by four cables. The detector itself is pos
     \label{fig:device_with_readout}
 \end{figure}
 
-The Control PC is connected directly to the ATLAS Network, which is isolated from the rest of CERN network infrastructure. Consequently, all communications outside the network have to utilize other systems. Acquisition control and real-time status monitoring of the network uses DCS (Detector Control System). Taken data is transferred to the EOS storage system. Communication between components of the system is depicted in Fig.~\ref{fig:data_flow}.
+The Control PC is connected directly to the ATLAS Network, which is isolated from the rest of CERN network infrastructure. Consequently, all communications outside the network have to utilize other systems. Acquisition control and real-time status monitoring of the network uses DCS (Detector Control System). Taken data is transferred to the EOS storage system~\cite{MAscetti2015,Peters2011}. Communication between components of the system is depicted in Fig.~\ref{fig:data_flow}.
 
 \begin{figure}[tbp]
 	\centering
@@ -97,7 +97,7 @@ The primary purpose of the subsystem is to provide reliable infrastructure for a
 
 Frames taken by TPX detectors are temporarily retained at the Control PC, then transferred to the EOS shared disk pool storage in 1-hour batches. Once in EOS, data files become available to all users of the system. Even though subsequent analysis can be performed atop the original data files, their storage format contains reduntant information and is thus not optimal for long-running analysis tasks. For this reason, original data files are first processed and converted into better suited storage format. The conversion process is automatically scheduled as a job by the manager after the data is confirmed to be valid and no detector malfunctions are suspected. In the course of this operation, frames are subject to cluster analysis~\cite{Holy2008} and measurements are combined with energy calibration data~\cite{Jakubek2011}. Outputs are stored back in EOS in format compatible with the ROOT Data Analysis Framework~\cite{ROOT}.
 
-The produced files are utilized as a database by the Data Visualization Application. In addition, these files serve as a starting point for other analysis tasks~\cite{Sopczak2017}. The original data files are compressed and downloaded to a backup medium for archivation.
+The produced files are utilized as a database by the Data Visualization Application. In addition, these files serve as a starting point for other analysis tasks such as luminosity monitoring~\cite{Sopczak2017}. The original data files are compressed and downloaded to a backup medium for archivation.
 
 \section{\label{sec:dal}Visualization Application}
 Processed data can be examined directly from the ROOT files or by means of the Data Visualization Application. \cite{Manek2016} This application features a simple web interface capable of displaying frames given specific detector, date and time. In addition, the application is capable of plotting fluxes of characteristic traces in specified time periods. See Fig. \ref{fig:positions}.
@@ -114,7 +114,7 @@ The application serves mainly as a tool of manual inspection of the network oper
 \end{figure}
 
 \section{\label{sec:conclusion}Conclusion}
-The presented software can successfully control detector acquisition and retrieve, analyze and display frames from the ATLAS-TPX network. All components of the system are fully operational. The Data Visualization Application is publicly available to the scientific community upon request.
+The presented software can successfully control detector acquisition and retrieve, analyze and display frames from the ATLAS-TPX Network. All components of the system are fully operational. The Data Visualization Application is publicly available to the scientific community upon request.
 
 
 %
