@@ -87,8 +87,30 @@ The Control PC is connected directly to the ATLAS Network, which is isolated fro
     \label{fig:data_flow}
 \end{figure}
 
-\section{\label{sec:acquisition}Acquisition \& Control Software}
-TODO Jakub
+\section{\label{sec:acquisition}Acquisition \& Control Subsystem}
+ATLAS-TPX network operation is controlled by the Acquisition \& Control Subsystem~\cite{Begera2016} hosted at the Control PC. The primary function of this software is to manage communication with all ATLASPIX readouts using a dedicated low-level protocol consisting of 19 instructions. These instructions fall into 3 general categories:
+~
+\begin{enumerate}
+  \item Acquisition Control Instructions are used to signal the beginning and the end of the data taking period and to retrieve the measured data from the detectors.
+  \item Hardware Configuration Instructions read and modify D/A and A/D converter values.
+  \item Device Status Queries are used to ascertain the general and the acquisition status of the detectors as well as the ATLASPIX readouts.
+\end{enumerate}
+
+The software provides a network interface which allows system operators to control detector acquisition by remotely issuing high-level commands. Translated into low-level instructions, these commands are then relayed to the ATLASPIX readouts responsible for their execution.
+
+High-level commands can be issued either through HTTP REST API accessible from the ATLAS Network or through DCS (Detector Control System) accessible from the ATLAS Control Room. Unlike low-level instructions, these commands need to be transmitted only when changes in detector configuration or acquisition are requested.
+
+Network status monitoring is provided by FSM (Finite State Machine). During regular operation, the control software periodically queries the status of all ATLASPIX readouts as well as the Control PC itself. This information is then forwarded to FSM responsible for the determination of the overall status of the network. The monitored values include:
+~
+\begin{itemize}
+  \item General status information -- connection status of all detectors and their respective ATLASPIX readouts, critical DAC values.
+  \item Acquisition mode settings of all detectors.
+  \item Control PC information -- available disk space utilization, CPU and memory load.
+  \item EOS availability -- connection status and network traffic.
+\end{itemize}
+
+Apart from system health indicators and performance meters, the control software also reports back the results of lightweight real-time data analysis for each detector in operation. These results are calculated and aggregated synchronously during the data taking process, and can therefore serve as a continuous feedback for acquisition parameter correction.
+
 
 \section{\label{sec:analysis}Data Analysis Subsystem}
 The Data Analysis Subsystem is comprised of virtual machines hosted at CERN Meyrin data center and managed by OpenStack private cloud. Each machine provides multitude of \textit{worker nodes} responsible for parallel execution of queued \textit{jobs} -- mutually independent operations that interact with data files. Scheduling and completion of such jobs as well as the heartbeat and load of workers is continuously tracked by a single centralized \textit{manager node}, which indirectly communicates with all workers through shared PostgreSQL database cluster.
