@@ -78,7 +78,14 @@ The readout has two parts connected by four cables. The detector itself is posit
     \label{fig:device_with_readout}
 \end{figure}
 
-The Control PC is connected directly to the ATLAS Network, which is isolated from the rest of CERN network infrastructure. Consequently, all communications outside the network have to utilize other systems. Acquisition control and real-time status monitoring of the network uses DCS (Detector Control System). Measured data is transferred to the EOS distributed storage system~\cite{MAscetti2015,Peters2011}. Communication between components of the system is depicted in Fig.~\ref{fig:data_flow}.
+The Control PC (seen in Fig.~\ref{fig:rack}) is connected directly to the ATLAS Network, which is isolated from the rest of CERN network infrastructure. Consequently, all communications outside the network have to utilize other systems. Acquisition control and real-time status monitoring of the network uses DCS (Detector Control System). Measured data is transferred to the EOS distributed storage system~\cite{MAscetti2015,Peters2011}. Communication between components of the system is depicted in Fig.~\ref{fig:data_flow}.
+
+\begin{figure}[tbp]
+	\centering
+        \includegraphics[clip,width=.45\textwidth, angle = 0 ]{Plots/rack_usa15.pdf}
+      \caption {ATLAS-TPX device, connected to its readout system through three Ethernet cables. The readout system consists of an FPGA, handling the device settings and operation, and a Raspberry Pi minicomputer for sending the data to the control PC in human readable format. Two voltage supplies are used for feeding the proper bias to each of the sensor layers.}
+    \label{fig:rack}
+\end{figure}
 
 \begin{figure}[tbp]
 	\centering
