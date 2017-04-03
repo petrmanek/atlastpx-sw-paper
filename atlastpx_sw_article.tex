@@ -49,7 +49,7 @@ Operation of the network is managed by a distributed software system comprised o
 \end{itemize}
 
 \section{\label{sec:device}Device Design}
-Each ATLAS-TPX device consists of two Timepix~\cite{Llopart2007} readout chips with silicon sensor layers of thicknesses 300\,$\mu$m and 500\,$\mu$m facing each other. They are interlaced by a set of neutron converters. The Timepix ASIC (application specific integrated circuit) divides the sensor area into a square matrix of $256 \times 256$ contiguous pixels with a pixel dimension of 55\,$\mu$m. It allows a configuration of each pixel in either of the three modes of operation: 
+Each ATLAS-TPX device consists of two Timepix~\cite{Llopart2007} readout chips with silicon sensor layers of thicknesses 300\,$\mu$m and 500\,$\mu$m facing each other~\cite{Bergmann_ATLASTPX_2016}. They are interlaced by a set of neutron converters. The Timepix ASIC (application specific integrated circuit) divides the sensor area into a square matrix of $256 \times 256$ contiguous pixels with a pixel dimension of 55\,$\mu$m. It allows a configuration of each pixel in either of the three modes of operation: 
 ~
 \begin{itemize}
 \item In the spectroscopic Time-over-Threshold (ToT) mode the energy deposition in the sensor material is measured.
@@ -57,7 +57,7 @@ Each ATLAS-TPX device consists of two Timepix~\cite{Llopart2007} readout chips w
 \item In the counting mode, the number of interactions with energies above 5\,keV during the exposure time are counted.
 \end{itemize}
 
-Data are taken in so-called frames, representing the counter contents of all individual pixels after an adjustable exposure time (often also referred to as frame acquisition time). In each frame, interacting quanta of ionizing radiation can be seen as tracks on the pixel matrix, which have characteristic shapes, depending on the particle range in silicon, its deposited energy, angle of incidence, and particle type. 
+Data are taken in so-called frames, representing the counter contents of all individual pixels after an adjustable exposure time (often also referred to as frame acquisition time). In each frame, interacting quanta of ionizing radiation can be seen as tracks on the pixel matrix, which have characteristic shapes, depending on the particle range in silicon, its deposited energy, angle of incidence, and particle type~\cite{Holy2008}.
 
 \section{\label{sec:hardware}Hardware Architecture}
 Given the harsh radiation environment within the ATLAS machine, ATLAS-TPX devices have to be connected to the rest of the system through a dedicated read-out interface. This interface is a special hardware device that reads data and controls acquisition of the detector~\cite{Pixelman}. The ATLASPIX interface (see Fig.~\ref{fig:device_with_readout}) was developed by modifying a regular FITPix interface~\cite{FITPix}.
