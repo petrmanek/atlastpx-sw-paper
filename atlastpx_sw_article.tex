@@ -78,20 +78,13 @@ The readout has two parts connected by four cables. The detector itself is posit
     \label{fig:device_with_readout}
 \end{figure}
 
-The Control PC (seen in Fig.~\ref{fig:rack}) is connected directly to the ATLAS Network, which is isolated from the rest of CERN network infrastructure. Consequently, all communications outside the network have to utilize other systems. Acquisition control and real-time status monitoring of the network uses DCS (Detector Control System). Measured data is transferred to the EOS distributed storage system~\cite{MAscetti2015,Peters2011}. Communication between components of the system is depicted in Fig.~\ref{fig:data_flow}.
+The Control PC (seen in Fig.~\ref{fig:rack}) is connected directly to the ATLAS Network, which is isolated from the rest of CERN network infrastructure. Consequently, all communications outside the network have to utilize other systems. Acquisition control and real-time status monitoring of the network uses DCS (Detector Control System). Measured data is transferred to the EOS distributed storage system~\cite{MAscetti2015,Peters2011}.
 
 \begin{figure}[tbp]
 	\centering
-        \includegraphics[clip,width=.45\textwidth, angle = 0 ]{Plots/rack_usa15.pdf}
-      \caption {ATLAS-TPX device, connected to its readout system through three Ethernet cables. The readout system consists of an FPGA, handling the device settings and operation, and a Raspberry Pi minicomputer for sending the data to the control PC in human readable format. Two voltage supplies are used for feeding the proper bias to each of the sensor layers.}
+        \includegraphics[clip,width=.25\textwidth, angle = 0 ]{Plots/rack_usa15.pdf}
+      \caption {TPX rack in the shielded technical room in the ATLAS cavern. The photo shows the installed ATLASPIX readouts connected to the Control PC, which communicates with DCS, EOS and FSM over the ATLAS Network.}
     \label{fig:rack}
-\end{figure}
-
-\begin{figure}[tbp]
-	\centering
-        \includegraphics[clip, trim={2cm 11.2cm 0cm 2.6cm}, width=.5\textwidth, angle = 0 ]{Plots/Doc1.pdf}
-      \caption {Scheme of the readout, detector control, and data flow.}
-    \label{fig:data_flow}
 \end{figure}
 
 \section{\label{sec:acquisition}Acquisition \& Control Subsystem}
@@ -124,7 +117,14 @@ The Data Analysis Subsystem is comprised of virtual machines hosted at CERN Meyr
 
 The primary purpose of the subsystem is to provide reliable infrastructure for automated data evaluation. For reasons of stability, this task is performed asynchronously with respect to all incoming data. In addition to processing new frames, this approach allows data files to be reprocessed when novel analysis algorithms are introduced.
 
-Frames taken by TPX detectors are temporarily retained at the Control PC, then transferred to the EOS shared disk pool storage in 1-hour batches. Once in EOS, data files become available to all users of the system. Even though subsequent analysis can be performed with the original data files, their storage format contains redundant information and is thus not optimal for long-running analysis tasks. For this reason, original data files are first processed and converted into better suited storage format. The conversion process is automatically scheduled as a job by the manager after the data is confirmed to be valid and no detector malfunctions are suspected. In the course of this operation, frames are subject to cluster analysis~\cite{Holy2008} and measurements are combined with energy calibration data~\cite{Jakubek2011}. Results of this process are stored back in EOS in format compatible with the ROOT Data Analysis Framework~\cite{ROOT}.
+\begin{figure}[tbp]
+	\centering
+        \includegraphics[clip, trim={2cm 11.2cm 0cm 2.6cm}, width=.5\textwidth, angle = 0 ]{Plots/Doc1.pdf}
+      \caption {Scheme of the readout, detector control, and data flow.}
+    \label{fig:data_flow}
+\end{figure}
+
+Frames taken by TPX detectors are temporarily retained at the Control PC, then transferred to the EOS shared disk pool storage in 1-hour batches (see Fig.~\ref{fig:data_flow}). Once in EOS, data files become available to all users of the system. Even though subsequent analysis can be performed with the original data files, their storage format contains redundant information and is thus not optimal for long-running analysis tasks. For this reason, original data files are first processed and converted into better suited storage format. The conversion process is automatically scheduled as a job by the manager after the data is confirmed to be valid and no detector malfunctions are suspected. In the course of this operation, frames are subject to cluster analysis~\cite{Holy2008} and measurements are combined with energy calibration data~\cite{Jakubek2011}. Results of this process are stored back in EOS in format compatible with the ROOT Data Analysis Framework~\cite{ROOT}.
 
 The produced files are utilized as a database by the Data Visualization Application. In addition, these files serve as a starting point for further analysis performed manually. The original data files are compressed and downloaded to backup archive media.
 
