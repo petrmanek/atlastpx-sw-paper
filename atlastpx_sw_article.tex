@@ -60,7 +60,7 @@ Each ATLAS-TPX device consists of two Timepix~\cite{Llopart2007} readout chips w
 Data are taken in so-called frames, representing the counter contents of all individual pixels after an adjustable exposure time (often also referred to as frame acquisition time). In each frame, interacting quanta of ionizing radiation can be seen as tracks on the pixel matrix, which have characteristic shapes, depending on the particle range in silicon, its deposited energy, angle of incidence, and particle type~\cite{Holy2008}.
 
 \section{\label{sec:hardware}Hardware Architecture}
-Given the harsh radiation environment within the ATLAS machine, ATLAS-TPX devices have to be connected to the rest of the system through a dedicated read-out interface. This interface is a special hardware device that reads data and controls acquisition of the detector~\cite{Pixelman}. The ATLASPIX interface (see Fig.~\ref{fig:device_with_readout}) was developed by modifying a regular FITPix interface~\cite{FITPix}.
+Given the harsh radiation environment within the ATLAS machine, ATLAS-TPX devices have to be connected to the rest of the system through a dedicated readout interface. This readout is a special hardware device that reads data and controls acquisition of the detector~\cite{Pixelman}. The ATLASPIX readout (see Fig.~\ref{fig:device_with_readout}) was developed by modifying a regular FITPix readout~\cite{FITPix}.
 
 \begin{figure}[tbp]
 	\centering
@@ -69,7 +69,7 @@ Given the harsh radiation environment within the ATLAS machine, ATLAS-TPX device
     \label{fig:positions}
 \end{figure}
 
-The interface has two parts connected by four cables. The detector itself is positioned and oriented within the ATLAS machine (see Fig.~\ref{fig:positions}), whereas the rest of the interface is placed in a nearby server room, shielded against ionizing radiation. Cables connect both parts, allowing protected hardware to control detectors remotely during operation of the machine. To manage multiple detectors simultaneously, a computer is directly connected to all read-out interfaces. This computer, also known as \textit{the Control PC}, gathers all measured data and forwards commands from the system operator to the detectors through the ATLASPIX interface.
+The readout has two parts connected by four cables. The detector itself is positioned and oriented within the ATLAS machine (see Fig.~\ref{fig:positions}), whereas the rest of the readout is placed in a nearby server room, shielded against ionizing radiation. Cables connect both parts, allowing protected hardware to control detectors remotely during operation of the machine. To manage multiple detectors simultaneously, a computer is directly connected to all readouts. This computer, also known as \textit{the Control PC}, gathers all measured data and forwards commands from the system operator to the detectors through the ATLASPIX readout.
 
 \begin{figure}[tbp]
 	\centering
@@ -78,7 +78,7 @@ The interface has two parts connected by four cables. The detector itself is pos
     \label{fig:device_with_readout}
 \end{figure}
 
-The Control PC is connected directly to the ATLAS Network, which is isolated from the rest of CERN network infrastructure. Consequently, all communications outside the network have to utilize other systems. Acquisition control and real-time status monitoring of the network uses DCS (Detector Control System). Taken data is transferred to the EOS storage system~\cite{MAscetti2015,Peters2011}. Communication between components of the system is depicted in Fig.~\ref{fig:data_flow}.
+The Control PC is connected directly to the ATLAS Network, which is isolated from the rest of CERN network infrastructure. Consequently, all communications outside the network have to utilize other systems. Acquisition control and real-time status monitoring of the network uses DCS (Detector Control System). Measured data is transferred to the EOS distributed storage system~\cite{MAscetti2015,Peters2011}. Communication between components of the system is depicted in Fig.~\ref{fig:data_flow}.
 
 \begin{figure}[tbp]
 	\centering
