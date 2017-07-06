@@ -41,11 +41,11 @@ University of West Bohemia, Univerzitni 26, 306 14 Plzen, Czech Republic}}
 %\tableofcontents
 
 \begin{abstract}
-A network of 15 Timepix pixel detectors was installed within the ATLAS experiment at CERN, Geneva. The network is capable of real-time measurement of the composition and spectral characteristics of the radiation fields. Its operation is managed by a dedicated software system. The presented article describes primary components of this system responsible for communication with detector hardware, online operation monitoring, remote acquisition control, automated data verification and analysis. The processed data can be accessed through an interactive web-based Data Visualization Application, which is available to the scientific community.
+A network of 15 Timepix pixel detectors was installed within the ATLAS experiment at CERN, Geneva. The network is capable of measuring the composition and spectral characteristics of the radiation fields in real-time. Its operation is managed by a dedicated software system. The presented article describes primary components of this system responsible for communication with detector hardware, online operation monitoring, remote acquisition control, automated data verification and analysis. The processed data can be accessed through an interactive web-based Data Visualization Application, which is available to the scientific community.
 \end{abstract}
 
 \section{\label{sec:introduction}Introduction}
-The ATLAS-MPX Network has been installed in the ATLAS cavern at the LHC at CERN~\cite{CampbellATLAS}. During the 2013-2014 shut-down period this network was upgraded to a two-layer Timepix design (ATLAS-TPX) with a faster readout system and improved capabilities to discriminate charged particles and gamma rays against neutrons~\cite{Proposal_Claude}.
+The ATLAS-MPX Network has been installed in the ATLAS cavern at the LHC at CERN~\cite{CampbellATLAS}. During the 2013-2014 shut-down period this network was upgraded to a two-layer Timepix design (ATLAS-TPX) with a faster readout system and improved capabilities to discriminate charged particles and gamma rays against neutrons~\cite{Proposal_Claude,Bergmann_ATLASTPX_2016}.
 
 Operation of the network is managed by a distributed software system comprised of several independent components:
 ~
@@ -67,7 +67,7 @@ Each ATLAS-TPX device consists of two Timepix~\cite{Llopart2007} readout chips w
 Data are taken in so-called frames, representing the counter contents of all individual pixels after an adjustable exposure time (often also referred to as frame acquisition time). In each frame, interacting quanta of ionizing radiation can be seen as tracks on the pixel matrix, which have characteristic shapes, depending on the particle range in silicon, its deposited energy, angle of incidence, and particle type~\cite{Holy2008}.
 
 \section{\label{sec:hardware}Hardware Architecture}
-Given the harsh radiation environment within the ATLAS machine, ATLAS-TPX devices have to be connected to the rest of the system through a dedicated readout interface. This readout is a special hardware device that reads data and controls acquisition of the detector~\cite{Pixelman}. The ATLASPIX readout (see Fig.~\ref{fig:device_with_readout}) was developed by modifying a regular FITPix readout~\cite{FITPix}.
+Given the harsh radiation environment within the ATLAS machine, ATLAS-TPX devices have to be connected to the rest of the system through a dedicated readout interface. This readout is a special hardware device that reads data and controls acquisition of the detector. The ATLASPIX readout (see Fig.~\ref{fig:device_with_readout}) was developed by modifying a regular FITPix readout~\cite{FITPix}.
 
 \begin{figure}[tbp]
 	\centering
@@ -95,19 +95,19 @@ The Control PC (seen in Fig.~\ref{fig:rack}) is connected directly to the ATLAS 
 \end{figure}
 
 \section{\label{sec:acquisition}Acquisition \& Control Subsystem}
-ATLAS-TPX network operation is controlled by the Acquisition \& Control Subsystem~\cite{Begera2016} hosted at the Control PC. The primary function of this software is to manage communication with all ATLASPIX readouts using a dedicated low-level protocol consisting of 19 instructions. These instructions fall into 3 general categories:
+The ATLAS-TPX network operation is controlled by the Acquisition \& Control Subsystem~\cite{Begera2016} hosted at the Control PC. The primary function of this software is to manage the communication with all ATLASPIX readouts using a dedicated low-level protocol consisting of 19 instructions. These instructions fall into 3 general categories:
 ~
 \begin{enumerate}
   \item Acquisition Control Instructions are used to signal the beginning and the end of the data taking period and to retrieve the measured data from the detectors.
-  \item Hardware Configuration Instructions read and modify D/A and A/D converter values.
+  \item Hardware Configuration Instructions read and modify digital-to-analog and analog-to-digital converter values.
   \item Device Status Queries are used to ascertain the general and the acquisition status of the detectors as well as the ATLASPIX readouts.
 \end{enumerate}
 
-The software provides a network interface which allows system operators to control detector acquisition by remotely issuing high-level commands. Translated into low-level instructions, these commands are then relayed to the ATLASPIX readouts responsible for their execution.
+The software provides a network interface which allows system operators to control detector acquisition by remotely issuing high-level commands. Translated into low-level instructions, these commands are then sent to the ATLASPIX readouts responsible for their execution.
 
-High-level commands can be issued either through HTTP REST API accessible from the ATLAS Network or through DCS (Detector Control System) accessible from the ATLAS Control Room. Unlike low-level instructions, these commands need to be transmitted only when changes in detector configuration or acquisition are requested.
+High-level commands can be issued either through the HTTP REST API, accessible from the ATLAS Network, or through the DCS (Detector Control System), accessible from the ATLAS Control Room. Unlike low-level instructions, these commands need to be transmitted only when changes in detector configuration or acquisition are requested.
 
-Network status monitoring is provided by FSM (Finite State Machine). During regular operation, the control software periodically queries the status of all ATLASPIX readouts as well as the Control PC itself. This information is then forwarded to FSM responsible for the determination of the overall status of the network. The monitored values include:
+The network status monitoring is provided by the FSM (Finite State Machine). During regular operation, the control software periodically queries the status of all ATLASPIX readouts as well as the Control PC itself. This information is then forwarded to FSM, responsible for the determination of the overall status of the network. The monitored values include:
 ~
 \begin{itemize}
   \item General status information -- connection status of all detectors and their respective ATLASPIX readouts, critical DAC values.
@@ -120,7 +120,7 @@ Apart from system health indicators and performance meters, the control software
 
 
 \section{\label{sec:analysis}Data Analysis Subsystem}
-The Data Analysis Subsystem is comprised of virtual machines hosted at CERN Meyrin data center and managed by OpenStack private cloud. Each machine provides multitude of \textit{worker nodes} responsible for parallel execution of queued \textit{jobs} -- mutually independent operations that interact with data files. Scheduling and completion of such jobs as well as the heartbeat and load of workers is continuously tracked by a single centralized \textit{manager node}, which indirectly communicates with all workers through shared PostgreSQL database cluster.
+The Data Analysis Subsystem is comprised of virtual machines hosted at the CERN Meyrin data center and managed by the OpenStack private cloud. Each machine provides a multitude of \textit{worker nodes} responsible for parallel execution of queued \textit{jobs} -- mutually independent operations that interact with data files. Scheduling and completion of such jobs as well as the heartbeat and load of workers is continuously tracked by a single centralized \textit{manager node}, which indirectly communicates with all workers through shared PostgreSQL database cluster.
 
 The primary purpose of the subsystem is to provide reliable infrastructure for automated data evaluation. For reasons of stability, this task is performed asynchronously with respect to all incoming data. In addition to processing new frames, this approach allows data files to be reprocessed when novel analysis algorithms are introduced.
 
@@ -131,7 +131,7 @@ The primary purpose of the subsystem is to provide reliable infrastructure for a
     \label{fig:data_flow}
 \end{figure}
 
-Frames taken by TPX detectors are temporarily retained at the Control PC, then transferred to the EOS shared disk pool storage in 1-hour batches (see Fig.~\ref{fig:data_flow}). Once in EOS, data files become available to all users of the system. Even though subsequent analysis can be performed with the original data files, their storage format contains redundant information and is thus not optimal for long-running analysis tasks. For this reason, original data files are first processed and converted into better suited storage format. The conversion process is automatically scheduled as a job by the manager after the data is confirmed to be valid and no detector malfunctions are suspected. In the course of this operation, frames are subject to cluster analysis~\cite{Holy2008} and measurements are combined with energy calibration data~\cite{Jakubek2011}. Results of this process are stored back in EOS in format compatible with the ROOT Data Analysis Framework~\cite{ROOT}.
+Frames taken by the TPX detectors are temporarily retained at the Control PC, then transferred to the EOS shared disk pool storage in 1-hour batches (see Fig.~\ref{fig:data_flow}). Once in EOS, data files become available to all users of the system. Even though subsequent analysis can be performed with the original data files, their storage format contains redundant information and is thus not optimal for long-running analysis tasks. For this reason, original data files are first processed and converted into better suited storage format. The conversion process is automatically scheduled as a job by the manager after the data is confirmed to be valid and no detector malfunctions are suspected. In the course of this operation, frames are subject to cluster analysis~\cite{Holy2008} and measurements are combined with energy calibration data~\cite{Jakubek2011}. Results of this process are stored back in EOS in format compatible with the ROOT Data Analysis Framework~\cite{ROOT}.
 
 The produced files are utilized as a database by the Data Visualization Application. In addition, these files serve as a starting point for further analysis performed manually. The original data files are compressed and downloaded to backup archive media.
 
@@ -146,11 +146,11 @@ The application serves mainly as a tool of manual inspection of the network oper
 	\centering
         \includegraphics[clip, width=.45\textwidth, angle = 0 ]{Plots/screen-tpx01-crosshair-zoomed.png}
 	  \caption {Screenshot of the Data Visualization Application. \cite{Manek2016} Top chart shows flux of characteristic traces in frames in specified time range, bottom charts show pixel matrices at a specified time.}
-    \label{fig:positions}
+    \label{fig:visualizer }
 \end{figure}
 
 \section{\label{sec:conclusion}Conclusion}
-The presented software can successfully control detector acquisition and retrieve, analyze and display frames from the ATLAS-TPX Network. All components of the system are fully operational. The Data Visualization Application is  available to the scientific community upon request.
+A software solution was presented to control acquisition and retrieve, analyze and display frames from the ATLAS-TPX Network. All components of the system are fully operational. The Data Visualization Application is  available to the scientific community upon request.
 
 \section*{\label{sec:acknowledgements}Acknowledgements}
 The work has been done in the frame of the Medipix collaboration. This research project has been supported by the Ministry of Education, Youth and Sports of the Czech Republic under project numbers: LM2015058 and LG15052
