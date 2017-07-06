@@ -1,5 +1,7 @@
 
-\documentclass[journal]{IEEEtran}
+\documentclass[conference]{IEEEtran}
+\usepackage[a4paper]{geometry}
+\geometry{top=20mm, bottom=20mm, left=30mm, right=20mm, twoside=true}
 
 \usepackage{color}
 \usepackage{isotope}
@@ -14,20 +16,25 @@
 
 \begin{document}
 
-\title{Software system for data acquisition and analysis operating the ATLAS-TPX Network}
+\title{Software System for Data Acquisition and Analysis Operating the ATLAS-TPX Network}
 
-\author{Petr~Manek, Jakub~Begera, Benedikt~Bergmann, Petr~Burian, Josef~Janecek, Stepan~Polansky, Stanislav~Pospisil~\IEEEmembership{Senior~Member,~IEEE}, Michal~Suk
-
-\thanks{P.~Manek, J.~Begera, B.~Bergmann, P.~Burian, J.~Janecek, S.~Polansky, S.~Pospisil, M.~Suk are with the Institute of Experimental and Applied Physics, Czech Technical University in Prague, Horska 3a/22, 128 00 Praha 2-Albertov, Czech Republic.
-
-P. Burian is also with the Faculty of Electrical Engineering, University of West Bohemia.\protect\\
-The work has been done in the frame of the Medipix collaboration. This research project has been supported by the Ministry of Education, Youth and Sports of the Czech Republic under project numbers: LM2015058 and LG15052\protect\\
-E-mail: petr.manek@cvut.cz, jakub.begera@cvut.cz}
-}
+\author{\IEEEauthorblockN{
+Petr~Manek$^{*}$,
+Jakub~Begera$^{*}$,
+Benedikt~Bergmann$^{*}$,
+Petr~Burian$^{*,\dagger}$,
+Josef~Janecek$^{*}$,\\
+Stepan~Polansky$^{*}$,
+Stanislav~Pospisil$^{*}$ and
+Michal~Suk$^{*}$}
+\IEEEauthorblockA{$^{*}$Institute of Experimental and Applied Physics\\
+Czech Technical University in Prague,
+Horska 3a/22, 128 00 Praha 2-Albertov, Czech Republic\\ Email: petr.manek@cvut.cz, jakub.begera@cvut.cz}
+\IEEEauthorblockA{$^{\dagger}$Faculty of Electrical Engineering\\
+University of West Bohemia, Univerzitni 26, 306 14 Plzen, Czech Republic}}
 
 \markboth{}%
-{P. Manek, J. Begera \MakeLowercase{\textit{et al.}}: Software system for data acquisition and analysis operating the ATLAS-TPX Network}
-
+{P. Manek, J. Begera \MakeLowercase{\textit{et al.}}: Software System for Data Acquisition and Analysis Operating the ATLAS-TPX Network}
 
 \maketitle
 
@@ -145,6 +152,8 @@ The application serves mainly as a tool of manual inspection of the network oper
 \section{\label{sec:conclusion}Conclusion}
 The presented software can successfully control detector acquisition and retrieve, analyze and display frames from the ATLAS-TPX Network. All components of the system are fully operational. The Data Visualization Application is  available to the scientific community upon request.
 
+\section*{\label{sec:acknowledgements}Acknowledgements}
+The work has been done in the frame of the Medipix collaboration. This research project has been supported by the Ministry of Education, Youth and Sports of the Czech Republic under project numbers: LM2015058 and LG15052
 
 %
 \bibliographystyle{IEEEtran}
