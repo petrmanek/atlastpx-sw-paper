@@ -16,9 +16,9 @@
 
 \title{Software system for data acquisition and analysis operating the ATLAS-TPX Network}
 
-\author{Petr~Manek, Jakub~Begera, Benedikt~Bergmann, Petr~Burian, Josef~Janecek, Stepan~Polansky, Stanislav~Pospisil~\IEEEmembership{Senior~Member,~IEEE}
+\author{Petr~Manek, Jakub~Begera, Benedikt~Bergmann, Petr~Burian, Josef~Janecek, Stepan~Polansky, Stanislav~Pospisil~\IEEEmembership{Senior~Member,~IEEE}, Michal~Suk
 
-\thanks{P.~Manek, J.~Begera, B.~Bergmann, P.~Burian, J.~Janecek, S.~Polansky, S.~Pospisil are with the Institute of Experimental and Applied Physics, Czech Technical University in Prague, Horska 3a/22, 128 00 Praha 2-Albertov, Czech Republic.
+\thanks{P.~Manek, J.~Begera, B.~Bergmann, P.~Burian, J.~Janecek, S.~Polansky, S.~Pospisil, M.~Suk are with the Institute of Experimental and Applied Physics, Czech Technical University in Prague, Horska 3a/22, 128 00 Praha 2-Albertov, Czech Republic.
 
 P. Burian is also with the Faculty of Electrical Engineering, University of West Bohemia.\protect\\
 The work has been done in the frame of the Medipix collaboration. This research project has been supported by the Ministry of Education, Youth and Sports of the Czech Republic under project numbers: LM2015058 and LG15052\protect\\
@@ -69,7 +69,7 @@ Given the harsh radiation environment within the ATLAS machine, ATLAS-TPX device
     \label{fig:positions}
 \end{figure}
 
-The readout has two parts connected by four cables. The detector itself is positioned and oriented within the ATLAS machine (see Fig.~\ref{fig:positions}), whereas the rest of the readout is placed in a nearby server room, shielded against ionizing radiation. Cables connect both parts, allowing protected hardware to control detectors remotely during operation of the machine. To manage multiple detectors simultaneously, a computer is directly connected to all readouts. This computer, also known as \textit{the Control PC}, gathers all measured data and forwards commands from the system operator to the detectors through the ATLASPIX readout.
+The readout has two parts connected by four cables. The detector itself is positioned and oriented within the ATLAS machine (see Fig.~\ref{fig:positions}), whereas the rest of the readout is placed in a nearby server room, shielded against ionizing radiation. Cables connect both parts, allowing protected hardware to control detectors remotely during operation of the machine. To manage multiple detectors simultaneously, a computer is directly connected to all readouts. This \textit{the Control PC} gathers all measured data and forwards commands from the system operator to the detectors through the ATLASPIX readout.
 
 \begin{figure}[tbp]
 	\centering
@@ -78,7 +78,7 @@ The readout has two parts connected by four cables. The detector itself is posit
     \label{fig:device_with_readout}
 \end{figure}
 
-The Control PC (seen in Fig.~\ref{fig:rack}) is connected directly to the ATLAS Network, which is isolated from the rest of CERN network infrastructure. Consequently, all communications outside the network have to utilize other systems. Acquisition control and real-time status monitoring of the network uses DCS (Detector Control System). Measured data is transferred to the EOS distributed storage system~\cite{MAscetti2015,Peters2011}.
+The Control PC (seen in Fig.~\ref{fig:rack}) is connected directly to the ATLAS Network, which is isolated from the rest of CERN network infrastructure. Consequently, all communications outside the network have to utilize other systems. Acquisition control and real-time status monitoring of the network uses DCS (Detector Control System). Measured data are transferred to the EOS distributed storage system~\cite{MAscetti2015,Peters2011}.
 
 \begin{figure}[tbp]
 	\centering
