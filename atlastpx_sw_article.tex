@@ -130,7 +130,7 @@ The Data Analysis Subsystem is comprised of virtual machines hosted at the CERN 
   \item File transfers -- between Control PC in USA15, EOS and Prague storage infrastructure.
 \end{itemize}
 
-Scheduling and completion of such jobs as well as the heartbeat and load state of worker nodes is continuously tracked by a single centralized \textit{manager node}, which indirectly communicates with all workers through shared PostgreSQL database cluster. The cluster operates independently of all nodes, providing additional level of robustness to the entire system. It is responsible for maintaining a simple priority queue with appropriate replication, data persistency and transaction ordering control.
+Scheduling and completion of such jobs as well as the heartbeat and load state of worker nodes is continuously tracked by a single centralized \textit{manager node}, which indirectly communicates with all workers through shared PostgreSQL database cluster. The cluster operates independently of all nodes, providing additional level of robustness to the entire system. It is responsible for maintaining a priority queue for scheduled jobs, a job locking mechanism for worker nodes, periodically updated worker node manifest and alert delivery system. The underlying database middleware ensures appropriate replication, data persistency and transaction ordering control.
 
 The primary purpose of the subsystem is to provide reliable infrastructure for automated data verification and evaluation. For reasons of stability, these tasks are performed asynchronously with respect to all incoming data. In addition to processing new frames, this approach allows data files to be reprocessed when novel analysis algorithms are introduced.
 
