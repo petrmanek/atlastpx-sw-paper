@@ -120,7 +120,17 @@ Apart from system health indicators and performance meters, the control software
 
 
 \section{\label{sec:analysis}Data Analysis Subsystem}
-The Data Analysis Subsystem is comprised of virtual machines hosted at the CERN Meyrin data center and managed by the OpenStack private cloud. Each machine provides a multitude of \textit{worker nodes} responsible for parallel execution of queued \textit{jobs} -- mutually independent operations that interact with data files. Scheduling and completion of such jobs as well as the heartbeat and load of workers is continuously tracked by a single centralized \textit{manager node}, which indirectly communicates with all workers through shared PostgreSQL database cluster.
+The Data Analysis Subsystem is comprised of virtual machines hosted at the CERN Meyrin data center and managed by the OpenStack private cloud. Each machine provides a multitude of \textit{worker nodes} responsible for parallel execution of queued \textit{jobs} -- mutually independent operations that interact with data files, providing:
+~
+\begin{itemize}
+  \item Cluster analysis -- morphological classification, converter region, optionally integration with energy calibration~\cite{Holy2008}.
+  \item Storage format conversions -- from ASCII plain text to ROOT and vice versa.
+  \item Data consistency verification.
+  \item Frame quality checks -- Monte Carlo sampling, alerts are generated when frames violate pre-defined quality criteria.
+  \item File transfers -- between Control PC in USA15, EOS and Prague storage infrastructure.
+\end{itemize}
+
+Scheduling and completion of such jobs as well as the heartbeat and load of workers is continuously tracked by a single centralized \textit{manager node}, which indirectly communicates with all workers through shared PostgreSQL database cluster.
 
 The primary purpose of the subsystem is to provide reliable infrastructure for automated data verification and evaluation. For reasons of stability, these tasks are performed asynchronously with respect to all incoming data. In addition to processing new frames, this approach allows data files to be reprocessed when novel analysis algorithms are introduced.
 
