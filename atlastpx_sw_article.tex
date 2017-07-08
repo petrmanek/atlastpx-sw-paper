@@ -122,7 +122,7 @@ Apart from system health indicators and performance meters, the control software
 \section{\label{sec:analysis}Data Analysis Subsystem}
 The Data Analysis Subsystem is comprised of virtual machines hosted at the CERN Meyrin data center and managed by the OpenStack private cloud. Each machine provides a multitude of \textit{worker nodes} responsible for parallel execution of queued \textit{jobs} -- mutually independent operations that interact with data files. Scheduling and completion of such jobs as well as the heartbeat and load of workers is continuously tracked by a single centralized \textit{manager node}, which indirectly communicates with all workers through shared PostgreSQL database cluster.
 
-The primary purpose of the subsystem is to provide reliable infrastructure for automated data evaluation. For reasons of stability, this task is performed asynchronously with respect to all incoming data. In addition to processing new frames, this approach allows data files to be reprocessed when novel analysis algorithms are introduced.
+The primary purpose of the subsystem is to provide reliable infrastructure for automated data verification and evaluation. For reasons of stability, these tasks are performed asynchronously with respect to all incoming data. In addition to processing new frames, this approach allows data files to be reprocessed when novel analysis algorithms are introduced.
 
 \begin{figure}[tbp]
 	\centering
@@ -150,7 +150,7 @@ The application serves mainly as a tool of manual inspection of the network oper
 \end{figure*}
 
 \section{\label{sec:conclusion}Conclusion}
-A software solution was presented to control acquisition and retrieve, analyze and display frames from the ATLAS-TPX Network. All components of the system are fully operational. The Data Visualization Application is  available to the scientific community upon request.
+A software solution was presented to control acquisition and retrieve, analyze and display frames from the ATLAS-TPX Network. All components of the system are fully operational. In addition, the presented application has been successfully integrated with TPX detector networks in other CERN experiments such as MoEDAL or ATLAS-GPX. The Data Visualization Application is available to the scientific community upon request.
 
 \section*{\label{sec:acknowledgements}Acknowledgements}
 The work has been done in the frame of the Medipix collaboration. This research project has been supported by the Ministry of Education, Youth and Sports of the Czech Republic under project numbers: LM2015058 and LG15052
