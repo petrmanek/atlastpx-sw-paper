@@ -127,7 +127,7 @@ The Data Analysis Subsystem is comprised of virtual machines hosted at the CERN 
   \item Storage format conversions -- from ASCII plain text to ROOT and vice versa.
   \item Data consistency verification.
   \item Frame quality checks -- Monte Carlo sampling, alerts are generated when frames violate pre-defined quality criteria.
-  \item File transfers -- between Control PC in USA15, EOS and Prague storage infrastructure.
+  \item File transfers -- gzip compression and subsequent archive transfers between Control PC in USA15, EOS and Prague storage infrastructure.
 \end{itemize}
 
 Scheduling and completion of such jobs as well as the heartbeat and load state of worker nodes is continuously tracked by a single centralized \textit{manager node}, which indirectly communicates with all workers through shared PostgreSQL database cluster. The cluster operates independently of all nodes, providing additional level of robustness to the entire system. It is responsible for maintaining a priority queue for scheduled jobs, a job locking mechanism for worker nodes, periodically updated worker node manifest and alert delivery system. The underlying database middleware ensures appropriate replication, data persistency and transaction ordering control.
