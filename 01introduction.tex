@@ -1,0 +1,15 @@
+%%% Article: Software System for Data Acquisition and Analysis Operating the ATLAS-TPX Network
+%%% Authors: Petr Manek, Jakub Begera
+%%% Copyright (c) 2017 IEAP CTU
+
+
+\section{\label{sec:introduction}Introduction}
+The ATLAS-MPX Network has been installed in the ATLAS cavern at the LHC at CERN~\cite{CampbellATLAS}. During the 2013-2014 shut-down period this network was upgraded to a two-layer Timepix design (ATLAS-TPX) with a faster readout system and improved capabilities to discriminate charged particles and gamma rays against neutrons~\cite{Proposal_Claude,Bergmann_ATLASTPX_2016}.
+
+Operation of the network is managed by a distributed software system comprised of several independent components:
+~
+\begin{itemize}
+  \item The Acquisition and Control Subsystem handles communication with detectors through the readout interface.
+  \item The Data Analysis Subsystem automatically verifies and processes frames taken by detectors.
+  \item The Data Visualization Application displays processed data in the form of pixel matrices and trace flux charts.
+\end{itemize}

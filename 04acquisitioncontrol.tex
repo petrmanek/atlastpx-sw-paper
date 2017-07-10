@@ -1,0 +1,28 @@
+%%% Article: Software System for Data Acquisition and Analysis Operating the ATLAS-TPX Network
+%%% Authors: Petr Manek, Jakub Begera
+%%% Copyright (c) 2017 IEAP CTU
+
+
+\section{\label{sec:acquisition}Acquisition \& Control Subsystem}
+The ATLAS-TPX network operation is controlled by the Acquisition \& Control Subsystem~\cite{Begera2016} hosted at the Control PC. The primary function of this software is to manage the communication with all ATLASPIX readouts using a dedicated low-level protocol consisting of 19 instructions. These instructions fall into 3 general categories:
+~
+\begin{enumerate}
+  \item Acquisition Control Instructions are used to signal the beginning and the end of the data taking period and to retrieve the measured data from the detectors.
+  \item Hardware Configuration Instructions read and modify digital-to-analog and analog-to-digital converter values.
+  \item Device Status Queries are used to ascertain the general and the acquisition status of the detectors as well as the ATLASPIX readouts.
+\end{enumerate}
+
+The software provides a network interface which allows system operators to control detector acquisition by remotely issuing high-level commands. Translated into low-level instructions, these commands are then sent to the ATLASPIX readouts responsible for their execution.
+
+High-level commands can be issued either through the HTTP REST API, accessible from the ATLAS Technical Network, or through the DCS (Detector Control System), accessible from the ATLAS Control Room. Unlike low-level instructions, these commands need to be transmitted only when changes in detector configuration or acquisition are requested.
+
+The network status monitoring is provided by the FSM (Finite State Machine). During regular operation, the control software periodically queries the status of all ATLASPIX readouts as well as the Control PC itself. This information is then forwarded to the DCS, making it available to the FSM and the network operator in the ATLAS Control Room. The FSM is responsible for the determination of the overall status of the network based on the monitored values and raising alarms when failures are detected. The monitored values include:
+~
+\begin{itemize}
+  \item General status information -- connection status of all detectors and their respective ATLASPIX readouts, critical DAC values.
+  \item Acquisition mode settings of all detectors.
+  \item Control PC information -- available disk space utilization, CPU, memory load and network throughput.
+  \item EOS availability -- connection status and latency.
+\end{itemize}
+
+Apart from system health indicators and performance meters, the control software also reports back the results of lightweight real-time data analysis for each detector in operation. These results are calculated and aggregated synchronously during the data taking process, and can therefore serve as a continuous feedback for acquisition parameter correction.
